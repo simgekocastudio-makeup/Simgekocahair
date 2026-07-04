@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simge Koca - Online Randevu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        /* Custom smooth page transitions */
+        html { scroll-behavior: smooth; }
+        .hover-trigger:hover .hover-target { transform: scale(1.05); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white min-h-screen font-sans">
+
+    <header class="flex flex-col items-center justify-center h-screen text-center px-4 animate__animated animate__fadeIn">
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4 animate__animated animate__zoomIn animate__delay-1s">
+            SİMGE KOCA
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 animate__animated animate__fadeInUp animate__delay-2s">
+            Geleceğinizi planlayın. Hızlı, güvenli ve kişiselleştirilmiş online randevu deneyimi.
+        </p>
+        <a href="#appointment" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-110 transition duration-300 ease-in-out animate__animated animate__bounceIn animate__delay-3s">
+            Hemen Randevu Al
+        </a>
+    </header>
+
+    <section id="appointment" class="py-20 px-4 max-w-md mx-auto transition-all duration-500 ease-in-out">
+        <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20">
+            <h2 class="text-3xl font-bold mb-6 text-center text-pink-400">Randevu Bilgileri</h2>
+            
+            <form id="appointmentForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Adınız Soyadınız</label>
+                    <input type="text" id="name" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Tarih</label>
+                    <input type="date" id="date" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Saat</label>
+                    <input type="time" id="time" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Not (Opsiyonel)</label>
+                    <textarea id="note" class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition" rows="3"></textarea>
+                </div>
+                
+                <button type="button" onclick="sendWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-lg transition duration-300 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.164 1.24 8.413 3.488 2.248 2.248 3.483 5.236 3.48 8.414-.003 6.557-5.338 11.902-11.89 11.902-1.993-.001-3.951-.5-5.688-1.448L0 24zm6.59-4.846c1.656.993 3.49 1.517 5.36 1.518 5.392 0 9.778-4.394 9.78-9.791.001-2.615-1.015-5.074-2.86-6.92-1.845-1.845-4.305-2.858-6.912-2.859-5.392 0-9.779 4.393-9.781 9.79-.001 1.942.493 3.84 1.424 5.548l-.931 3.402 3.488-.918z"/></svg>
+                    WhatsApp ile Onayla
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function sendWhatsApp() {
+            const phoneNumber = "905459893034"; // Formatted with country code
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const note = document.getElementById('note').value;
+
+            if(!name || !date || !time) {
+                alert("Lütfen gerekli alanları doldurun.");
+                return;
+            }
+
+            // Creating the WhatsApp message text
+            const message = `Merhaba Simge Koca,%0A%0Aİnternet sitenizden yeni bir randevu talebi oluşturuldu:%0A%0A👤 *İsim:* ${name}%0A📅 *Tarih:* ${date}%0A🕒 *Saat:* ${time}%0A📝 *Not:* ${note}`;
+            
+            // Redirecting to WhatsApp
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
