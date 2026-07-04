@@ -5,77 +5,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simge Koca - Online Randevu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        /* Custom smooth page transitions */
-        html { scroll-behavior: smooth; }
-        .hover-trigger:hover .hover-target { transform: scale(1.05); transition: all 0.3s ease; }
+        body {
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            background: #09090b;
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Özel Parıltı ve Efektler */
+        .glow-effect {
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.15);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        /* Giriş Animasyonları (Gelişmiş CSS Geçişleri) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Özel Hizmet Kartı Hover Efekti */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 12px 30px rgba(236, 72, 153, 0.1);
+        }
+        /* Arka Plan Hareketli Işıklar */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+        }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.15); }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white min-h-screen font-sans">
+<body class="text-neutral-100 antialiased relative">
 
-    <header class="flex flex-col items-center justify-center h-screen text-center px-4 animate__animated animate__fadeIn">
-        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4 animate__animated animate__zoomIn animate__delay-1s">
+    <div class="orb w-80 h-80 bg-pink-500 top-[-10%] left-[-10%]"></div>
+    <div class="orb w-[450px] h-[450px] bg-purple-600 top-[40%] right-[-10%]" style="animation-duration: 18s;"></div>
+    <div class="orb w-96 h-96 bg-indigo-500 bottom-[-5%] left-[5%]"></div>
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-card border-t-0 border-x-0 py-4 px-6 md:px-12 flex justify-between items-center">
+        <a href="#" class="serif-font text-2xl font-bold tracking-widest bg-gradient-to-r from-neutral-100 via-pink-300 to-neutral-100 bg-clip-text text-transparent">
             SİMGE KOCA
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 animate__animated animate__fadeInUp animate__delay-2s">
-            Geleceğinizi planlayın. Hızlı, güvenli ve kişiselleştirilmiş online randevu deneyimi.
-        </p>
-        <a href="#appointment" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-110 transition duration-300 ease-in-out animate__animated animate__bounceIn animate__delay-3s">
-            Hemen Randevu Al
         </a>
+        <a href="#randevu" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium text-sm py-2.5 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-pink-500/20 hover:scale-105">
+            Randevu Al
+        </a>
+    </nav>
+
+    <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16 z-10">
+        <div class="max-w-4xl mx-auto">
+            <span class="text-xs uppercase tracking-[0.4em] text-pink-400 font-semibold mb-4 block">Hair Studio & Makeup</span>
+            <h1 class="serif-font text-5xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-tight">
+                Güzelliğinizi <br>
+                <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">Yeniden Keşfedin</span>
+            </h1>
+            <p class="text-neutral-400 text-base md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Simge Koca Hair Studio ile tarzınızı yansıtan, modern dokunuşlar ve profesyonel tasarımlarla göz alıcı değişimlere adım atın.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#randevu" class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-4 px-10 rounded-full shadow-lg hover:shadow-pink-500/20 transform hover:scale-105 transition-all duration-300">
+                    Hemen Randevu Oluştur
+                </a>
+                <a href="#hizmetler" class="w-full sm:w-auto glass-card hover:bg-white/10 text-white font-medium py-4 px-10 rounded-full transition-all duration-300">
+                    Hizmetlerimizi İnceleyin
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-50">
+            <a href="#hizmetler" class="text-white text-xl"><i class="fa-solid fa-chevron-down"></i></a>
+        </div>
     </header>
 
-    <section id="appointment" class="py-20 px-4 max-w-md mx-auto transition-all duration-500 ease-in-out">
-        <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20">
-            <h2 class="text-3xl font-bold mb-6 text-center text-pink-400">Randevu Bilgileri</h2>
+    <section id="hizmetler" class="py-24 px-6 md:px-12 max-w-7xl mx-auto z-10 relative">
+        <div class="text-center mb-16 reveal">
+            <h2 class="serif-font text-3xl md:text-5xl font-bold mb-4">Neler Yapıyoruz?</h2>
+            <div class="w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl service-card reveal">
+                <div class="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-400 text-2xl mb-6">
+                    <i class="fa-solid fa-scissors"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 serif-font">Profesyonel Saç Tasarımı</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed">Yüz hatlarınıza ve tarzınıza en uygun modern kesim, renklendirme og stil danışmanlığı.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl service-card reveal" style="transition-delay: 100ms;">
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-2xl mb-6">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 serif-font">Gelin & Özel Gün Makyajı</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed">En mutlu günlerinizde pürüzsüz ve uzun süre kalıcı, profesyonel makyaj uygulamaları.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl service-card reveal" style="transition-delay: 200ms;">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-2xl mb-6">
+                    <i class="fa-solid fa-sparkles"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 serif-font">Saç Bakım & Keratin</h3>
+                <p class="text-neutral-400 text-sm leading-relaxed">Yıpranmış saçlar için derinlemesine onarıcı, besleyici özel saç bakım seansları.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="randevu" class="py-24 px-4 z-10 relative">
+        <div class="max-w-xl mx-auto glass-card p-8 md:p-10 rounded-3xl border border-white/10 glow-effect reveal">
+            <div class="text-center mb-8">
+                <h2 class="serif-font text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Online Randevu</h2>
+                <p class="text-neutral-400 text-sm">Bilgilerinizi girerek saniyeler içinde WhatsApp üzerinden randevunuzu onaylatın.</p>
+            </div>
             
-            <form id="appointmentForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Adınız Soyadınız</label>
-                    <input type="text" id="name" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+            <form id="appointmentForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Adınız Soyadınız</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-3.5 text-neutral-500"><i class="fa-regular fa-user"></i></span>
+                        <input type="text" id="name" placeholder="Örn. Simge Koca" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-900/50 border border-neutral-800 focus:border-pink-500/50 focus:outline-none transition-all duration-300 text-white placeholder-neutral-600">
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Tarih</label>
-                    <input type="date" id="date" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Tarih Seçin</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-neutral-500"><i class="fa-regular fa-calendar"></i></span>
+                            <input type="date" id="date" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-900/50 border border-neutral-800 focus:border-pink-500/50 focus:outline-none transition-all duration-300 text-white">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Saat Seçin</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-neutral-500"><i class="fa-regular fa-clock"></i></span>
+                            <input type="time" id="time" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-900/50 border border-neutral-800 focus:border-pink-500/50 focus:outline-none transition-all duration-300 text-white">
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Saat</label>
-                    <input type="time" id="time" required class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition">
+
+                <div class="space-y-2">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">İstediğiniz Hizmet</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-3.5 text-neutral-500"><i class="fa-solid fa-bars"></i></span>
+                        <select id="service" class="w-full pl-11 pr-4 py-3 rounded-xl bg-neutral-900/50 border border-neutral-800 focus:border-pink-500/50 focus:outline-none transition-all duration-300 text-neutral-300 appearance-none">
+                            <option value="Saç Kesimi & Tasarım" class="bg-neutral-900">Saç Kesimi & Tasarım</option>
+                            <option value="Saç Boyama / Renklendirme" class="bg-neutral-900">Saç Boyama / Renklendirme</option>
+                            <option value="Profesyonel Makyaj" class="bg-neutral-900">Profesyonel Makyaj</option>
+                            <option value="Saç Bakımı & Keratin" class="bg-neutral-900">Saç Bakımı & Keratin</option>
+                            <option value="Diğer" class="bg-neutral-900">Diğer (Not Kısmında Belirtiniz)</option>
+                        </select>
+                        <span class="absolute right-4 top-4 text-neutral-500 pointer-events-none text-xs"><i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Not (Opsiyonel)</label>
-                    <textarea id="note" class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-pink-500 focus:outline-none transition" rows="3"></textarea>
+
+                <div class="space-y-2">
+                    <label class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Eklemek İstediğiniz Not</label>
+                    <textarea id="note" rows="3" placeholder="Belirtmek istediğiniz özel bir durum veya istek var mı?" class="w-full p-4 rounded-xl bg-neutral-900/50 border border-neutral-800 focus:border-pink-500/50 focus:outline-none transition-all duration-300 text-white placeholder-neutral-600 resize-none"></textarea>
                 </div>
                 
-                <button type="button" onclick="sendWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg shadow-lg transition duration-300 flex items-center justify-center gap-2">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.164 1.24 8.413 3.488 2.248 2.248 3.483 5.236 3.48 8.414-.003 6.557-5.338 11.902-11.89 11.902-1.993-.001-3.951-.5-5.688-1.448L0 24zm6.59-4.846c1.656.993 3.49 1.517 5.36 1.518 5.392 0 9.778-4.394 9.78-9.791.001-2.615-1.015-5.074-2.86-6.92-1.845-1.845-4.305-2.858-6.912-2.859-5.392 0-9.779 4.393-9.781 9.79-.001 1.942.493 3.84 1.424 5.548l-.931 3.402 3.488-.918z"/></svg>
-                    WhatsApp ile Onayla
+                <button type="button" onclick="sendWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-[1.01]">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    Randevuyu WhatsApp ile Onayla
                 </button>
             </form>
         </div>
     </section>
 
+    <footer class="py-12 border-t border-neutral-900 text-center text-sm text-neutral-600 z-10 relative">
+        <p>&copy; 2026 Simge Koca. Tüm Hakları Saklıdır.</p>
+    </footer>
+
     <script>
+        // Kaydıkça Ortaya Çıkan Ögeler İçin Tetikleyici (Scroll Reveal)
+        function revealElements() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach((element) => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", revealElements);
+        window.addEventListener("load", () => {
+            revealElements();
+            // Hero animasyonu için ilk elementi hemen aktif et
+            document.querySelector(".reveal")?.classList.add("active");
+        });
+
+        // WhatsApp Entegrasyonu
         function sendWhatsApp() {
-            const phoneNumber = "905459893034"; // Formatted with country code
-            const name = document.getElementById('name').value;
+            const phoneNumber = "905459893034"; // Türkiye Ülke Koduyla Entegre Edildi
+            const name = document.getElementById('name').value.trim();
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
-            const note = document.getElementById('note').value;
+            const service = document.getElementById('service').value;
+            const note = document.getElementById('note').value.trim();
 
             if(!name || !date || !time) {
-                alert("Lütfen gerekli alanları doldurun.");
+                alert("Lütfen İsim, Tarih ve Saat alanlarını eksiksiz doldurunuz.");
                 return;
             }
 
-            // Creating the WhatsApp message text
-            const message = `Merhaba Simge Koca,%0A%0Aİnternet sitenizden yeni bir randevu talebi oluşturuldu:%0A%0A👤 *İsim:* ${name}%0A📅 *Tarih:* ${date}%0A🕒 *Saat:* ${time}%0A📝 *Not:* ${note}`;
-            
-            // Redirecting to WhatsApp
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-        }
-    </script>
-</body>
-</html>
+            // Tarih formatını güzelleştirme (YYYY-MM-DD -> DD/MM/YYYY)
+            const dateParts = date.split("-");
+            const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+
+            // Şık Bir Mesaj Şablonu Tasarımı
+            let message = `✨ *SİMGE KOCA HAIR STUDIO* ✨%0A`;
+            message += `Yeni Randevu Talebim var:%0A%0A`;
+            message += `👤 *Müşteri:* ${name}%0A`;
+            message += `📅 *Tarih:*
