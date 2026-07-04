@@ -91,7 +91,7 @@
                 <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">Yeniden Keşfedin</span>
             </h1>
             <p class="text-neutral-400 text-base md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                Simge Koca Hair Studio ile tarzınızı yansıtan, modern dokunuşlar ve profesyonel tasarımlarla göz alıcı değişimlere adım atın.
+                Simge Koca Hair & makeup Studio ile tarzınızı yansıtan, modern dokunuşlar ve profesyonel tasarımlarla göz alıcı değişimlere adım atın.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a href="#randevu" class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-4 px-10 rounded-full shadow-lg hover:shadow-pink-500/20 transform hover:scale-105 transition-all duration-300">
@@ -245,7 +245,22 @@
             const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
 
             // Şık Bir Mesaj Şablonu Tasarımı
-            let message = `✨ *SİMGE KOCA HAIR STUDIO* ✨%0A`;
+            let message = `✨ *SİMGE KOCA HAIR MAKEUP STUDIO* ✨%0A`;
             message += `Yeni Randevu Talebim var:%0A%0A`;
             message += `👤 *Müşteri:* ${name}%0A`;
-            message += `📅 *Tarih:*
+            message += `📅 *Tarih:* ${formattedDate}%0A`;
+            message += `🕒 *Saat:* ${time}%0A`;
+            message += `💇‍♀️ *Hizmet:* ${service}%0A`;
+            
+            if(note) {
+                message += `📝 *Müşteri Notu:* ${note}%0A`;
+            }
+            
+            message += `%0A*Lütfen randevuyu onaylamak için bu mesajı yanıtlayın.*`;
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
